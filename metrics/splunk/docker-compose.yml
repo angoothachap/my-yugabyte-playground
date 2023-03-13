@@ -49,24 +49,45 @@ services:
       - SERVICE_9000_NAME=yb-tserver
 
 
+  # The Prometheus server:
   prometheus:
-    image: prom/prometheus:v2.29.2
+    image: prom/prometheus:v2.42.0
     container_name: prometheus
     ports:
       - 9090:9090
     volumes:
-      - ./mnt/prometheus/:/etc/prometheus/
-
-  grafana:
-    image: grafana/grafana:8.1.3
-    container_name: grafana
+      - ./prometheus/:/etc/prometheus/
+  # Splunk Enterprise server:
+  splunk:
+    image: splunk/splunk:8.2
+    container_name: splunk
+    depends_on:
+      - yb-master
+      - yb-tserver
     environment:
-      - "GF_SECURITY_ADMIN_USER=admin"
-      - "GF_SECURITY_ADMIN_PASSWORD=password"
-      - "GF_USERS_ALLOW_SIGN_UP=false"
+      - SPLUNK_START_ARGS=--accept-license
+      - SPLUNK_HEC_TOKEN=00000000-0000-0000-0000-0000000000000
+      - SPLUNK_PASSWORD=changeme
     ports:
-      - 3000:3000
+      - 18000:8000
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:8000']
+      interval: 5s
+      timeout: 5s
+      retries: 20
     volumes:
-      - ./mnt/grafana/:/etc/grafana/provisioning
-
-
+      - ./splunk.yml:/tmp/defaults/default.yml
+      - /opt/splunk/var
+      - /opt/splunk/etc
+  # OpenTelemetry Collector
+  otelcollector:
+    image: quay.io/signalfx/splunk-otel-collector:0.59.1
+    container_name: otelcollector
+    command: ["--config=/etc/otel-collector-config.yml", "--set=service.telemetry.logs.level=debug"]
+    volumes:
+      - ./otel-collector-config.yml:/etc/otel-collector-config.yml
+    depends_on:
+      splunk:
+        condition: service_healthy
+      prometheus:
+        condition: service_started

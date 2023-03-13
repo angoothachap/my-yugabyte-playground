@@ -1,0 +1,11 @@
+2023-03-10 18:55:57.109 UTC [82] LOG:  database system was shut down at 2023-03-10 18:40:18 UTC
+I0310 18:55:57.162341    84 webserver.cc:307] Starting webserver on yb-tserver-n1:13000
+I0310 18:55:57.168151    84 webserver.cc:312] Document root: /home/yugabyte/www
+2023-03-10 18:55:57.173 UTC [54] LOG:  database system is ready to accept connections
+I0310 18:55:57.186405    84 webserver.cc:302] Webserver listen spec is 172.31.0.5:13000
+I0310 18:55:57.198025    84 webserver.cc:418] Webserver started. Bound to: http://172.31.0.5:13000/
+2023-03-10 19:37:56.513 UTC [54] LOG:  received fast shutdown request
+2023-03-10 19:37:56.540 UTC [54] LOG:  aborting any active transactions
+2023-03-10 19:37:56.548 UTC [84] FATAL:  terminating background worker "YSQL webserver" due to administrator command
+2023-03-10 19:37:56.633 UTC [54] LOG:  background worker "YSQL webserver" (PID 84) exited with exit code 1
+2023-03-10 19:37:56.635 UTC [86] LOG:  shutting down

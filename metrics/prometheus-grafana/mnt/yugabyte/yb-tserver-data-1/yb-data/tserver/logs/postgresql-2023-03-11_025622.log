@@ -1,7 +1,0 @@
-2023-03-11 02:56:22.078 UTC [80] LOG:  database system was shut down at 2023-03-11 02:56:14 UTC
-2023-03-11 02:56:22.128 UTC [52] LOG:  database system is ready to accept connections
-I0311 02:56:22.126050    82 webserver.cc:307] Starting webserver on yb-tserver-n1:13000
-I0311 02:56:22.133622    82 webserver.cc:312] Document root: /home/yugabyte/www
-I0311 02:56:22.151338    82 webserver.cc:302] Webserver listen spec is 192.168.80.5:13000
-I0311 02:56:22.156808    82 webserver.cc:418] Webserver started. Bound to: http://192.168.80.5:13000/
-2023-03-11 03:09:49.841 UTC [52] LOG:  received fast shutdown request

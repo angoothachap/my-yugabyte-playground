@@ -61,12 +61,16 @@ services:
   splunk:
     image: splunk/splunk:8.2
     container_name: splunk
+    platform: linux/amd64
     depends_on:
       - yb-master
       - yb-tserver
     environment:
-      - SPLUNK_START_ARGS=--accept-license
+      - SPLUNK_START_ARGS="--accept-license --answer-yes --seed-passwd changeme"
       - SPLUNK_HEC_TOKEN=00000000-0000-0000-0000-0000000000000
+      - SPLUNK_ENABLE_LISTEN=9997
+      - SPLUNK_ADD="tcp 1514"
+      - SPLUNK_USER=splunk
       - SPLUNK_PASSWORD=changeme
     ports:
       - 18000:8000
@@ -87,7 +91,5 @@ services:
     volumes:
       - ./otel-collector-config.yml:/etc/otel-collector-config.yml
     depends_on:
-      splunk:
-        condition: service_healthy
-      prometheus:
-        condition: service_started
+      - splunk
+      - prometheus

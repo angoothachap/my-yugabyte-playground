@@ -5,7 +5,7 @@ variable "gke_num_nodes" {
   description = "number of gke nodes"
 }
 variable "machine_type" {
-  default     = "n2-standard-8"
+  default     = "n2-standard-4"
   description = "GKE node VM type"
 }
 
@@ -51,7 +51,7 @@ resource "google_container_node_pool" "east_nodes" {
     metadata = {
       disable-legacy-endpoints = "true"
     }
-    service_account = "yba-sa-owner@yugabyte-customer-success.iam.gserviceaccount.com"
+    service_account = "yba-sa-owner@${project_id}.iam.gserviceaccount.com"
   }
 }
 

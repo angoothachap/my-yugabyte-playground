@@ -1,0 +1,17 @@
+Kafka Connect SMT to convert a [bytea](https://www.postgresql.org/docs/current/datatype-binary.html#id-1.5.7.12.10) to String
+
+This SMT supports converting a bytea into text in the record Key or Value
+Properties:
+
+|Name|Description|Type|Default|Importance|
+|---|---|---|---|---|
+|`bytea.field.name`| Field name for bytea | String | `byteaData` | High |
+
+Example on how to add to your connector:
+```
+transforms=bytea2text
+transforms.bytea2text.type=com.github.angoothachap.cdc.smt.ByteA2Text$Value
+transforms.bytea2text.bytea.field.name="byteaData"
+```
+
+Example created referring to https://www.confluent.io/blog/kafka-connect-single-message-transformation-tutorial-with-examples/

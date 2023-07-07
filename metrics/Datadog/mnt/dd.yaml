@@ -1,0 +1,30 @@
+instances:
+  - openmetrics_endpoint: http://yb-master-n1:7000/prometheus-metrics
+    namespace: yugabyte_prom
+    auth_type: basic
+    username: apikey
+    password: <<YOUR_DATADOG_KEY>
+    metrics: [{".*": {"type": "histogram"}}]
+    min_collection_interval: 60
+  - openmetrics_endpoint: http://yb-tserver-n1:9000/prometheus-metrics
+    namespace: yugabyte_prom
+    auth_type: basic
+    username: apikey
+    password: <<YOUR_DATADOG_KEY>
+    metrics: [{".*": {"type": "histogram"}}]
+    min_collection_interval: 60
+  - openmetrics_endpoint: http://yb-tserver-n1:13000/prometheus-metrics
+    namespace: yugabyte_prom
+    auth_type: basic
+    username: apikey
+    password: <<YOUR_DATADOG_KEY>
+    metrics: [{".*": {"type": "histogram"}}]
+    min_collection_interval: 60
+  - openmetrics_endpoint: http://yb-tserver-n1:12000/prometheus-metrics
+    namespace: yugabyte_prom
+    auth_type: basic
+    username: apikey
+    password: <<YOUR_DATADOG_KEY>
+    metrics: [{".*": {"type": "histogram"}}]
+    min_collection_interval: 60
+    

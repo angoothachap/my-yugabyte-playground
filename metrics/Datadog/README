@@ -2,4 +2,4 @@ Replace <<YOUR_DATADOG_KEY>> with your Datadog API key
 
 Run `docker-compose up -d`
 
-Check Datadog for metrics. You should be able to see them under namespace `yugabyte_prom` as shown [here](https://github.com/angoothachap/my-yugabyte-playground/blob/main/metrics/Datadog/static/DD_metrics.jpg) 
+Check Datadog for metrics. You should be able to see them under namespace `yugabyte_prom` as shown [here](../Datadog/static/DD_metrics.jpg) 
